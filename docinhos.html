@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docinhos - Golden Cakes</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fff0f4;
+      padding: 15px;
+      color: #444;
+    }
+
+    .btn-voltar-inicio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #fff;
+      color: #d66885;
+      border: 1px solid #f2d6df;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-voltar-inicio:hover {
+      background-color: #f7a8be;
+      color: #ffffff;
+      border-color: #f7a8be;
+    }
+
+    .montador-cardapio {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      background-image: url(fundo.jpg);
+      text-align: center;
+      border-radius: 16px;
+      border: 1px solid #f2d6df;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .montador-cardapio h2 {
+      color: #d66885;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .aviso-antecedencia {
+      background: #fff0f4;
+      color: #c0392b;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
+      border-left: 4px solid #d66885;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      accent-color: #f7a8be;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .grupo-opcao {
+      margin-bottom: 16px;
+    }
+
+    .grupo-opcao h3 {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #f9e3eb;
+      padding-bottom: 4px;
+    }
+
+    .subtitulo-categoria {
+      font-size: 0.82rem;
+      color: #d66885;
+      margin: 10px 0 6px 0;
+      font-weight: bold;
+    }
+
+    .opcoes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .card-radio, .item-opcao {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid #f2d6df;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #fff;
+      font-size: 0.83rem;
+      transition: background-color 0.2s;
+    }
+
+    .card-radio:hover, .item-opcao:hover {
+      background-color: #fff5f8;
+    }
+
+    .item-opcao span {
+      flex: 1;
+    }
+
+    textarea#detalhesDoces {
+      width: 100%;
+      height: 50px;
+      padding: 8px;
+      border: 1px solid #f2d6df;
+      border-radius: 8px;
+      font-size: 0.83rem;
+      resize: none;
+      outline: none;
+    }
+
+    .resumo-pedido {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px dashed #f2d6df;
+    }
+
+    .valor-final span {
+      font-size: 0.8rem;
+      color: #666;
+      display: block;
+    }
+
+    .valor-final strong {
+      font-size: 1.4rem;
+      color: #d66885;
+    }
+
+    .btn-adicionar {
+      background-color: #f7a8be;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-adicionar:hover {
+      background-color: #e88fa7;
+    }
+
+    @media (max-width: 650px) {
+      .opcoes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <section class="montador-cardapio">
+<a href="index.html" class="btn-voltar-inicio">&larr; Voltar ao Início</a>
+    <h2>🍬 Monte seu Cento de Docinhos (12g)</h2>
+    <p class="aviso-antecedencia">⚠️ Encomendas com no mínimo 5 dias de antecedência. Sinal de 50% no pedido.</p>
+
+    <form id="formDocinhos">
+      
+      <!-- Categoria de Doces -->
+      <div class="grupo-opcao">
+        <h3>1. Escolha a Categoria de Doces</h3>
+        <div class="opcoes-grid">
+          <label class="card-radio">
+            <input type="radio" name="categoriaDoce" value="Tradicionais" data-preco="95" checked onchange="trocarCategoriaDoce()">
+            <span>Tradicionais - R$ 95</span>
+          </label>
+          <label class="card-radio">
+            <input type="radio" name="categoriaDoce" value="Gourmet" data-preco="130" onchange="trocarCategoriaDoce()">
+            <span>Gourmet - R$ 130</span>
+          </label>
+          <label class="card-radio">
+            <input type="radio" name="categoriaDoce" value="Especiais" data-preco="145" onchange="trocarCategoriaDoce()">
+            <span>Especiais - R$ 145</span>
+          </label>
+          <label class="card-radio">
+            <input type="radio" name="categoriaDoce" value="Coloridos (Ninho)" data-preco="100" onchange="trocarCategoriaDoce()">
+            <span>Coloridos - R$ 100</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Sabores Dinâmicos -->
+      <div class="grupo-opcao">
+        <h3>2. Escolha os Sabores (Até 4 sabores por cento)</h3>
+        <div id="containerSabores" class="opcoes-grid">
+          <!-- Renderizado via Javascript conforme a categoria -->
+        </div>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="grupo-opcao">
+        <h3>3. Quantidade de Centos</h3>
+        <div class="opcoes-grid">
+          <label class="card-radio">
+            <input type="radio" name="qtdCento" value="1 Cento (100 un)" data-multiplicador="1" checked onchange="calcularPreco()">
+            <span>1 Cento (100 un)</span>
+          </label>
+          <label class="card-radio">
+            <input type="radio" name="qtdCento" value="2 Centos (200 un)" data-multiplicador="2" onchange="calcularPreco()">
+            <span>2 Centos (200 un)</span>
+          </label>
+          <label class="card-radio">
+            <input type="radio" name="qtdCento" value="3 Centos (300 un)" data-multiplicador="3" onchange="calcularPreco()">
+            <span>3 Centos (300 un)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Observações -->
+      <div class="grupo-opcao">
+        <h3>4. Observações / Cores para Temas</h3>
+        <textarea id="detalhesDoces" placeholder="Digite aqui se deseja combinação de cores ou detalhes do tema..."></textarea>
+      </div>
+
+      <!-- Resumo -->
+      <div class="resumo-pedido">
+        <div class="valor-final">
+          <span>Total estimado:</span>
+          <strong id="precoFinal">R$ 95,00</strong>
+        </div>
+        <button type="button" class="btn-adicionar" onclick="adicionarDocesAoCarrinho()">
+           🛍️ Adicionar à Sacola
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <script>
+    const saboresPorCategoria = {
+      Tradicionais: ["Ninho", "Limão", "Paçoca", "Beijinho", "Maracujá", "Prestígio", "Brigadeiro", "Cajuzinho", "Casadinho", "Bicho de pé", "Pé de moça", "Coco queimado"],
+      Gourmet: ["Oreo", "Churros", "Ferreiro", "Sensação", "Olho de sogra", "Ninho c/ Nutella", "Brigadeiro Belga", "Chocolate Branco", "Surpresa de Uva"],
+      Especiais: ["Nozes", "Avelã", "Amêndoas", "Floresta Negra"],
+      "Coloridos (Ninho)": ["Ejetor", "Carimbo (Consultar Temas)"]
+    };
+
+    function trocarCategoriaDoce() {
+      const categoria = document.querySelector('input[name="categoriaDoce"]:checked').value;
+      const container = document.getElementById('containerSabores');
+      const listaSabores = saboresPorCategoria[categoria] || [];
+
+      container.innerHTML = '';
+      listaSabores.forEach(sabor => {
+        container.innerHTML += `
+          <label class="item-opcao">
+            <input type="checkbox" name="saborDoce" value="${sabor}" onchange="limitarSabores(this)">
+            <span>${sabor}</span>
+          </label>
+        `;
+      });
+
+      calcularPreco();
+    }
+
+    function limitarSabores(el) {
+      const marcados = document.querySelectorAll('input[name="saborDoce"]:checked');
+      if (marcados.length > 4) {
+        alert("Você pode escolher no máximo 4 sabores por cento!");
+        el.checked = false;
+      }
+    }
+
+    function calcularPreco() {
+      const catRadio = document.querySelector('input[name="categoriaDoce"]:checked');
+      const qtdRadio = document.querySelector('input[name="qtdCento"]:checked');
+
+      const precoBase = catRadio ? parseFloat(catRadio.dataset.preco) : 0;
+      const mult = qtdRadio ? parseInt(qtdRadio.dataset.multiplicador) : 1;
+
+      const total = precoBase * mult;
+      document.getElementById('precoFinal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarDocesAoCarrinho() {
+      const categoria = document.querySelector('input[name="categoriaDoce"]:checked').value;
+      const qtdText = document.querySelector('input[name="qtdCento"]:checked').value;
+      const sabores = Array.from(document.querySelectorAll('input[name="saborDoce"]:checked')).map(el => el.value);
+      const obs = document.getElementById('detalhesDoces').value;
+      const precoTexto = document.getElementById('precoFinal').innerText;
+      const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace('.', '').replace(',', '.').trim());
+
+      if (sabores.length === 0) {
+        alert("Por favor, selecione pelo menos 1 sabor de doce!");
+        return;
+      }
+
+      const itemDoce = {
+        nome: `Docinhos ${categoria} (${qtdText})`,
+        detalhes: `Sabores: ${sabores.join(', ')}`,
+        obs: obs,
+        preco: precoNumerico,
+        quantidade: 1
+      };
+
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGoldenCakes')) || [];
+      carrinho.push(itemDoce);
+      localStorage.setItem('carrinhoGoldenCakes', JSON.stringify(carrinho));
+
+      alert(`${itemDoce.nome} adicionado à sacola!`);
+      window.location.href = 'index.html';
+    }
+
+    window.onload = function() {
+      trocarCategoriaDoce();
+    };
+  </script>
+</body>
+</html>

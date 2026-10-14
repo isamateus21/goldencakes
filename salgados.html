@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salgados e Bolo Salgado - Golden Cakes</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fff0f4;
+      padding: 15px;
+      color: #444;
+    }
+
+    .btn-voltar-inicio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #fff;
+      color: #d66885;
+      border: 1px solid #f2d6df;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-voltar-inicio:hover {
+      background-color: #ff85a2;
+      color: #ffffff;
+      border-color: #ff85a2;
+    }
+
+    .montador-cardapio {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      background-image: url(fundo.jpg);
+      text-align: center;
+      border-radius: 16px;
+      border: 2px solid #ff85a2;
+      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.15);
+    }
+
+    .montador-cardapio h2 {
+      color: #c71585;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .aviso-antecedencia {
+      background: #fff0f4;
+      color: #d63384;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      border-left: 4px solid #ff85a2;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      accent-color: #ff85a2;
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
+    .grupo-opcao {
+      margin-bottom: 22px;
+    }
+
+    .grupo-opcao h3 {
+      font-size: 1rem;
+      color: #c71585;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f2d6df;
+      padding-bottom: 4px;
+    }
+
+    .opcoes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .opcoes-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .card-radio, .item-opcao {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid #f2d6df;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #fff;
+      font-size: 0.85rem;
+      transition: background-color 0.2s;
+    }
+
+    .card-radio:hover, .item-opcao:hover {
+      background-color: #fff0f4;
+    }
+
+    .card-radio div {
+      line-height: 1.3;
+    }
+
+    .qtd-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qtd-container label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #c71585;
+    }
+
+    .qtd-container input {
+      width: 70px;
+      padding: 6px;
+      border: 1px solid #f2d6df;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    textarea#detalhesPedido {
+      width: 100%;
+      height: 70px;
+      padding: 10px;
+      border: 1px solid #f2d6df;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      resize: none;
+      outline: none;
+    }
+
+    .resumo-pedido {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 2px dashed #f2d6df;
+    }
+
+    .valor-final span {
+      font-size: 0.85rem;
+      color: #666;
+      display: block;
+    }
+
+    .valor-final strong {
+      font-size: 1.5rem;
+      color: #c71585;
+    }
+
+    .btn-adicionar {
+      background-color: #ff85a2;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-adicionar:hover {
+      background-color: #d63384;
+    }
+
+    @media (max-width: 650px) {
+      .opcoes-grid, .opcoes-grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo-pedido {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <section class="montador-cardapio">
+  <a href="index.html" class="btn-voltar-inicio">&larr; Voltar ao Início</a>
+
+
+    <h2>🥟 Salgados & Bolos Salgados</h2>
+    <p class="aviso-antecedencia">🔔 Encomendas com antecedência. Sinal de 50% do valor total do pedido.</p>
+
+    <form id="formSalgados">
+      
+      <!-- 1. Salgados (Tipo de Preparo) -->
+      <div class="grupo-opcao">
+        <h3>1. Cento de Salgadinhos (Tipo de Preparo)</h3>
+        <div class="opcoes-grid">
+          <label class="card-radio">
+            <input type="radio" name="tipoSalgado" value="Nenhum" data-preco="0" onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Não desejo salgados avulsos</strong>
+            </div>
+          </label>
+
+          <label class="card-radio">
+            <input type="radio" name="tipoSalgado" value="Salgados Crus" data-preco="50" checked onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Salgados Crus (Cento) - R$ 50,00</strong>
+              <small style="display:block; color:#666;">Prontos para fritar em casa</small>
+            </div>
+          </label>
+
+          <label class="card-radio">
+            <input type="radio" name="tipoSalgado" value="Salgados Fritos" data-preco="75" onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Salgados Fritos (Cento) - R$ 75,00</strong>
+              <small style="display:block; color:#666;">Fritos e prontos para servir</small>
+            </div>
+          </label>
+        </div>
+
+        <div class="qtd-container" style="margin-top: 15px;">
+          <label for="qtdCento">Quantidade (Centos):</label>
+          <input type="number" id="qtdCento" value="1" min="1" max="50" onchange="calcularPrecoGeral()" onkeyup="calcularPrecoGeral()">
+        </div>
+      </div>
+
+      <!-- 2. Sabores dos Salgados -->
+      <div class="grupo-opcao">
+        <h3>2. Escolha os Sabores dos Salgadinhos</h3>
+        <div class="opcoes-grid-3">
+          <label class="item-opcao"><input type="checkbox" name="saborSalgado" value="Coxinha"> <span>Coxinha</span></label>
+          <label class="item-opcao"><input type="checkbox" name="saborSalgado" value="Bolinha de Queijo"> <span>Bolinha</span></label>
+          <label class="item-opcao"><input type="checkbox" name="saborSalgado" value="Croquete"> <span>Croquete</span></label>
+          <label class="item-opcao"><input type="checkbox" name="saborSalgado" value="Calabresa"> <span>Calabresa</span></label>
+          <label class="item-opcao"><input type="checkbox" name="saborSalgado" value="Maravilha"> <span>Maravilha</span></label>
+        </div>
+      </div>
+
+      <!-- 3. Bolo Salgado -->
+      <div class="grupo-opcao">
+        <h3>3. Bolo Salgado (Opcional)</h3>
+        <div class="opcoes-grid-3">
+          <label class="card-radio">
+            <input type="radio" name="boloSalgado" value="Nenhum" data-preco="0" checked onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Sem Bolo Salgado</strong>
+            </div>
+          </label>
+
+          <label class="card-radio">
+            <input type="radio" name="boloSalgado" value="Bolo Salgado Pequeno (20 fatias)" data-preco="95" onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Pequeno - R$ 95,00</strong>
+              <small style="display:block; color:#666;">Serve até 20 fatias</small>
+            </div>
+          </label>
+
+          <label class="card-radio">
+            <input type="radio" name="boloSalgado" value="Bolo Salgado Médio (45/50 fatias)" data-preco="165" onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Médio - R$ 165,00</strong>
+              <small style="display:block; color:#666;">Serve 45 a 50 fatias</small>
+            </div>
+          </label>
+
+          <label class="card-radio">
+            <input type="radio" name="boloSalgado" value="Bolo Salgado Grande (70 fatias)" data-preco="200" onchange="calcularPrecoGeral()">
+            <div>
+              <strong>Grande - R$ 200,00</strong>
+              <small style="display:block; color:#666;">Serve até 70 fatias</small>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 4. Observações -->
+      <div class="grupo-opcao">
+        <h3>4. Observações / Recheios do Bolo Salgado</h3>
+        <textarea id="detalhesPedido" placeholder="Ex: Preferência de sabores dos salgados, recheio do bolo salgado (frango, presunto e queijo, etc.)..."></textarea>
+      </div>
+
+      <!-- Resumo e Botão -->
+      <div class="resumo-pedido">
+        <div class="valor-final">
+          <span>Total do Pedido:</span>
+          <strong id="precoFinal">R$ 50,00</strong>
+        </div>
+        <button type="button" class="btn-adicionar" onclick="adicionarAoCarrinho()">
+          🛍️ Adicionar à Sacola
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <script>
+    function calcularPrecoGeral() {
+      const tipoSalgadoRadio = document.querySelector('input[name="tipoSalgado"]:checked');
+      const boloSalgadoRadio = document.querySelector('input[name="boloSalgado"]:checked');
+      const qtdCento = parseInt(document.getElementById('qtdCento').value) || 1;
+
+      let precoSalgado = tipoSalgadoRadio ? parseFloat(tipoSalgadoRadio.dataset.preco) : 0;
+      let precoBolo = boloSalgadoRadio ? parseFloat(boloSalgadoRadio.dataset.preco) : 0;
+
+      let total = (precoSalgado * qtdCento) + precoBolo;
+
+      document.getElementById('precoFinal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarAoCarrinho() {
+      const tipoSalgado = document.querySelector('input[name="tipoSalgado"]:checked').value;
+      const boloSalgado = document.querySelector('input[name="boloSalgado"]:checked').value;
+      const sabores = Array.from(document.querySelectorAll('input[name="saborSalgado"]:checked')).map(el => el.value);
+      const qtdCento = parseInt(document.getElementById('qtdCento').value) || 1;
+      const obs = document.getElementById('detalhesPedido').value;
+
+      const precoTexto = document.getElementById('precoFinal').innerText;
+      const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace('.', '').replace(',', '.').trim());
+
+      if (tipoSalgado === "Nenhum" && boloSalgado === "Nenhum") {
+        alert("Por favor, selecione ao menos uma opção de salgado ou bolo salgado!");
+        return;
+      }
+
+      if (tipoSalgado !== "Nenhum" && sabores.length === 0) {
+        alert("Por favor, selecione pelo menos 1 sabor de salgadinho!");
+        return;
+      }
+
+      let nomeItem = "Pedido Especial de Salgados";
+      let detalhes = [];
+
+      if (tipoSalgado !== "Nenhum") {
+        detalhes.push(`${qtdCento} Cento(s) de ${tipoSalgado} (${sabores.join(', ')})`);
+      }
+
+      if (boloSalgado !== "Nenhum") {
+        detalhes.push(`${boloSalgado}`);
+      }
+
+      const itemPedido = {
+        nome: nomeItem,
+        detalhes: detalhes.join(' + '),
+        obs: obs,
+        preco: precoNumerico,
+        quantidade: 1
+      };
+
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGoldenCakes')) || [];
+      carrinho.push(itemPedido);
+      localStorage.setItem('carrinhoGoldenCakes', JSON.stringify(carrinho));
+
+      alert(`Item adicionado à sua sacola com sucesso!`);
+      window.location.href = 'index.html';
+    }
+
+    window.onload = function() {
+      calcularPrecoGeral();
+    };
+  </script>
+</body>
+</html>

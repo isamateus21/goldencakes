@@ -1,0 +1,245 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    header, .header-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 10px;
+    }
+    nav, .menu-direita {
+        margin-left: 0;
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 18px;  
+        width: 100%;
+    }
+    nav a {
+        font-size: 0.85rem;
+    }
+
+    /* Ajuste para telas menores ficarem responsivas */
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    }
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px rgba(214, 51, 132, 0.88);
+    backdrop-filter: blur(8px);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    background-color: rgba(224, 165, 210, 0.315);
+}
+
+header img, .logo {
+    max-height: 100px;
+    width: 100px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.navlinks {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #c71585;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #ff85a2;
+    transform: translateY(-2px);
+}
+
+.cart-btn-header {
+    background: #ff85a2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+main {
+    background-image: url(fundo.jpg); 
+    height: 100%;
+}
+
+.clique {
+    text-decoration: none;
+    color: rgba(192, 27, 170, 0.616);
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.log {
+    height: 120px;
+    object-fit: contain;
+}
+
+.logonav {
+    display: flex;
+    text-align: center;
+    color: rgba(192, 27, 170, 0.616);
+    align-items: center;
+}
+
+.categorias {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.titulo-secao {
+    color: #d63384;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-family: sans-serif;
+}
+
+/* --- AJUSTE DOS CARDS (3 em cima e 3 embaixo) --- */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 260px)); /* Define exatamente 3 colunas */
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card {
+    width: 100%; /* Preenche o espaço da coluna no Grid */
+    background-color: #ffffff;
+    border: 2px solid #ff85a2;
+    border-radius: 18px;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(214, 51, 132, 0.25);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(214, 51, 132, 0.35);
+}
+
+.card-imagem {
+    height: 180px;
+    width: 100%;
+}
+
+.card-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-conteudo {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+.card-conteudo h3 {
+    color: #c71585;
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+}
+
+.card-conteudo p {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0 0 15px 0;
+    line-height: 1.3;
+    flex-grow: 1; 
+}
+
+
+/* Container dos Botões Flutuantes no Canto Direiro Inferior */
+.icones-flutuantes {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 998; /* Fica acima do conteúdo, mas abaixo do menu aberto da sacola */
+}
+
+/* Estilo Base das Bolinhas */
+.btn-flutuante {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-flutuante:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Cor do WhatsApp */
+.btn-flutuante.whatsapp {
+    background-color: #25d366;
+}
+
+/* Cor Gradiente do Instagram */
+.btn-flutuante.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+/* Botão */
+.btn-card {
+    background-color: #ff85a2;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: block;
+    text-align: center;
+    transition: background-color 0.2s ease; 
+}
+
+.card:hover .btn-card {
+    background-color: #d63384;
+}

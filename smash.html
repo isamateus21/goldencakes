@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smash The Cake - Golden Cakes</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fff0f4;
+      padding: 15px;
+      color: #444;
+    }
+
+    .btn-voltar-inicio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #fff;
+      color: #d66885;
+      border: 1px solid #f2d6df;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-voltar-inicio:hover {
+      background-color: #ff85a2;
+      color: #ffffff;
+      border-color: #ff85a2;
+    }
+
+    .montador-cardapio {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      background-image: url(fundo.jpg);
+      text-align: center;
+      border-radius: 16px;
+      border: 2px solid #ff85a2;
+      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.15);
+    }
+
+    .montador-cardapio h2 {
+      color: #c71585;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .info-smash {
+      background-color: #fff8fa;
+      border: 1px solid #f2d6df;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .info-smash p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .aviso-antecedencia {
+      background: #fff0f4;
+      color: #d63384;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      border-left: 4px solid #ff85a2;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    input[type="radio"] {
+      accent-color: #ff85a2;
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
+    .grupo-opcao {
+      margin-bottom: 22px;
+    }
+
+    .grupo-opcao h3 {
+      font-size: 1rem;
+      color: #c71585;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f2d6df;
+      padding-bottom: 4px;
+    }
+
+    .opcoes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .card-radio {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 12px;
+      border: 1px solid #f2d6df;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .card-radio:hover {
+      background-color: #fff0f4;
+      border-color: #ff85a2;
+    }
+
+    .card-radio-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .campo-texto {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .campo-texto label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #c71585;
+    }
+
+    .campo-texto input, textarea#detalhesSmash {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #f2d6df;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .campo-texto input:focus, textarea#detalhesSmash:focus {
+      border-color: #ff85a2;
+    }
+
+    textarea#detalhesSmash {
+      height: 70px;
+      resize: none;
+    }
+
+    .resumo-pedido {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 2px dashed #f2d6df;
+    }
+
+    .valor-final span {
+      font-size: 0.85rem;
+      color: #666;
+      display: block;
+    }
+
+    .valor-final strong {
+      font-size: 1.5rem;
+      color: #c71585;
+    }
+
+    .btn-adicionar {
+      background-color: #ff85a2;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-adicionar:hover {
+      background-color: #d63384;
+    }
+
+    @media (max-width: 650px) {
+      .opcoes-grid, .inputs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo-pedido {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <section class="montador-cardapio">
+ <a href="index.html" class="btn-voltar-inicio">&larr; Voltar ao Início</a>
+
+    <h2>🎂 Smash The Cake</h2>
+    
+    <div class="info-smash">
+      <p>✨ <strong>Bolo de 15cm sem recheio na massa branca</strong>, somente cobertura no chantilly.</p>
+    </div>
+
+    <p class="aviso-antecedencia">🔔 Observação: Encomendas com no mínimo 5 dias de antecedência.</p>
+
+    <form id="formSmash">
+      
+      <!-- 1. Modelo do Smash -->
+      <div class="grupo-opcao">
+        <h3>1. Escolha a Opção de Smash</h3>
+        <div class="opcoes-grid">
+          
+          <label class="card-radio">
+            <div class="card-radio-header">
+              <input type="radio" name="opcaoSmash" value="Smash Simples" data-preco="55" checked onchange="atualizarCampos(); calcularPrecoSmash();">
+              <strong>Smash Simples</strong>
+            </div>
+            <span style="color:#c71585; font-weight:bold; font-size:1rem;">R$ 55,00</span>
+            <small style="color:#666;">Apenas decoração em chantilly.</small>
+          </label>
+
+          <label class="card-radio">
+            <div class="card-radio-header">
+              <input type="radio" name="opcaoSmash" value="Smash com Nome e Idade" data-preco="65" onchange="atualizarCampos(); calcularPrecoSmash();">
+              <strong>Smash com Nome e Idade</strong>
+            </div>
+            <span style="color:#c71585; font-weight:bold; font-size:1rem;">R$ 65,00</span>
+            <small style="color:#666;">Inclui personalização de Nome e Idade.</small>
+          </label>
+
+          <label class="card-radio">
+            <div class="card-radio-header">
+              <input type="radio" name="opcaoSmash" value="Smash com Topper" data-preco="75" onchange="atualizarCampos(); calcularPrecoSmash();">
+              <strong>Smash com Topper</strong>
+            </div>
+            <span style="color:#c71585; font-weight:bold; font-size:1rem;">R$ 75,00</span>
+            <small style="color:#666;">Topper completo do tema escolhido.</small>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- 2. Personalização do Bolo -->
+      <div class="grupo-opcao">
+        <h3>2. Personalização</h3>
+        <div class="inputs-grid">
+          
+          <div class="campo-texto">
+            <label for="corChantilly">Cores do Chantilly *</label>
+            <input type="text" id="corChantilly" placeholder="Ex: Rosa e Branco, Azul bebê...">
+          </div>
+
+          <div class="campo-texto" id="boxNomeIdade" style="display: none;">
+            <label for="nomeIdade">Nome e Idade *</label>
+            <input type="text" id="nomeIdade" placeholder="Ex: Ayra, 1 ano">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 3. Tema do Topper (Visível apenas para o modelo com Topper) -->
+      <div class="grupo-opcao" id="boxTemaTopper" style="display: none;">
+        <h3>3. Tema do Topper *</h3>
+        <input type="text" id="temaTopper" style="width: 100%; padding: 10px; border: 1px solid #f2d6df; border-radius: 8px; font-size: 0.85rem;" placeholder="Ex: Mundo Bita, Circo, Safari, Princesas...">
+      </div>
+
+      <!-- 4. Observações gerais -->
+      <div class="grupo-opcao">
+        <h3>Observações Adicionais (Opcional)</h3>
+        <textarea id="detalhesSmash" placeholder="Ex: Alguma observação sobre as cores, rosetas etc..."></textarea>
+      </div>
+
+      <!-- Resumo e Botão -->
+      <div class="resumo-pedido">
+        <div class="valor-final">
+          <span>Total do Pedido:</span>
+          <strong id="precoFinalSmash">R$ 55,00</strong>
+        </div>
+        <button type="button" class="btn-adicionar" onclick="adicionarSmashAoCarrinho()">
+          🛍️ Adicionar à Sacola
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <script>
+    function atualizarCampos() {
+      const opcao = document.querySelector('input[name="opcaoSmash"]:checked').value;
+      const boxNomeIdade = document.getElementById('boxNomeIdade');
+      const boxTemaTopper = document.getElementById('boxTemaTopper');
+
+      if (opcao === "Smash Simples") {
+        boxNomeIdade.style.display = "none";
+        boxTemaTopper.style.display = "none";
+      } else if (opcao === "Smash com Nome e Idade") {
+        boxNomeIdade.style.display = "flex";
+        boxTemaTopper.style.display = "none";
+      } else if (opcao === "Smash com Topper") {
+        boxNomeIdade.style.display = "flex";
+        boxTemaTopper.style.display = "block";
+      }
+    }
+
+    function calcularPrecoSmash() {
+      const opcaoRadio = document.querySelector('input[name="opcaoSmash"]:checked');
+      let total = opcaoRadio ? parseFloat(opcaoRadio.dataset.preco) : 55;
+      document.getElementById('precoFinalSmash').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarSmashAoCarrinho() {
+      const opcao = document.querySelector('input[name="opcaoSmash"]:checked').value;
+      const cores = document.getElementById('corChantilly').value.trim();
+      const nomeIdade = document.getElementById('nomeIdade').value.trim();
+      const temaTopper = document.getElementById('temaTopper').value.trim();
+      const obs = document.getElementById('detalhesSmash').value.trim();
+
+      const precoTexto = document.getElementById('precoFinalSmash').innerText;
+      const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace('.', '').replace(',', '.').trim());
+
+      // Validações inteligentes de acordo com o modelo selecionado
+      if (!cores) {
+        alert("Por favor, informe a(s) cor(es) desejada(s) para o chantilly!");
+        return;
+      }
+
+      if ((opcao === "Smash com Nome e Idade" || opcao === "Smash com Topper") && !nomeIdade) {
+        alert("Por favor, preencha o Nome e a Idade para personalizar!");
+        return;
+      }
+
+      if (opcao === "Smash com Topper" && !temaTopper) {
+        alert("Por favor, informe o Tema do Topper desejado!");
+        return;
+      }
+
+      // Construção do resumo do item
+      let detalhesTexto = `Massa: Branca (15cm) | Cores: ${cores}`;
+      
+      if (opcao !== "Smash Simples" && nomeIdade) {
+        detalhesTexto += ` | Personalização: ${nomeIdade}`;
+      }
+
+      if (opcao === "Smash com Topper" && temaTopper) {
+        detalhesTexto += ` | Tema do Topper: ${temaTopper}`;
+      }
+
+      const itemSmash = {
+        nome: `${opcao}`,
+        detalhes: detalhesTexto,
+        obs: obs,
+        preco: precoNumerico,
+        quantidade: 1
+      };
+
+      let carrinho = JSON.parse(localStorage.getItem('carrinhoGoldenCakes')) || [];
+      carrinho.push(itemSmash);
+      localStorage.setItem('carrinhoGoldenCakes', JSON.stringify(carrinho));
+
+      alert(`${itemSmash.nome} adicionado à sua sacola com sucesso!`);
+      window.location.href = 'index.html';
+    }
+
+    window.onload = function() {
+      atualizarCampos();
+      calcularPrecoSmash();
+    };
+  </script>
+</body>
+</html>

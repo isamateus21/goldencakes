@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte seu Caseirinho / Vulcão</title>
+    <link rel="stylesheet" href="styledecorados.css">
+    <style>
+      /* Correção para não vazar a tela em dispositivos móveis */
+      .opcoes-lista, .opcoes-grid-recheios, .opcoes-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+      }
+
+      .item-opcao, .card-radio {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+    </style>
+</head>
+<body>
+
+<section class="montador-cardapio">
+<a href="index.html" class="btn-voltar-inicio">
+  &larr; Voltar ao Início
+</a>
+
+  <h2 class="titulo">🍰 Monte o seu Bolo Caseirinho / Vulcão</h2>
+  <p class="aviso-antecedencia">⚠️ Aceitamos encomendas com no mínimo 5 dias de antecedência. Pagamento de 50% do valor total do pedido no ato da encomenda.</p>
+
+  <form id="formCaseirinho">
+    <!-- 1. Tipo de Bolo -->
+    <div class="grupo-opcao">
+      <h3>1. Escolha o Tipo de Bolo</h3>
+      <div class="opcoes-grid">
+        <label class="card-radio">
+          <input type="radio" name="tipoBolo" value="Caseirinho" data-preco="45" checked onchange="alternarTipoBolo()">
+          <span>Caseirinho (R$ 45,00)</span>
+        </label>
+        <label class="card-radio">
+          <input type="radio" name="tipoBolo" value="Bolo Vulcão" data-preco="55" onchange="alternarTipoBolo()">
+          <span>Bolo Vulcão (R$ 55,00)</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 2. Sabores -->
+    <div class="grupo-opcao">
+      <h3 id="tituloSabor">2. Escolha o Sabor do Caseirinho</h3>
+
+      <!-- Sabores Caseirinho -->
+      <div id="secaoCaseirinho" class="opcoes-lista">
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Milho" checked> <span>Milho</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Fubá"> <span>Fubá</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Aipim"> <span>Aipim</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Coco"> <span>Coco</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Formigueiro"> <span>Formigueiro</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Chocolate"> <span>Chocolate</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Mesclado"> <span>Mesclado</span></label>
+        <label class="item-opcao"><input type="radio" name="saborCaseirinho" value="Cenoura"> <span>Cenoura</span></label>
+      </div>
+
+      <!-- Sabores Vulcão -->
+      <div id="secaoVulcao" class="opcoes-grid-recheios" style="display: none;">
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Brigadeiro" checked> <span>Brigadeiro</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Prestígio"> <span>Prestígio</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Choconinho"> <span>Choconinho</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Ninho"> <span>Ninho</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Cenoura"> <span>Cenoura</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Churros"> <span>Churros</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Bicho de pé"> <span>Bicho de Pé</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Laka"> <span>Laka</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Oreo"> <span>Oreo</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Ovomaltine"> <span>Ovomaltine</span></label>
+        <label class="item-opcao"><input type="radio" name="saborVulcao" value="Paçoca"> <span>Paçoca</span></label>
+      </div>
+    </div>
+
+    <!-- 3. Massa (SÓ APARECE NO BOLO VULCÃO) -->
+    <div class="grupo-opcao" id="secaoMassa" style="display: none;">
+      <h3>3. Escolha a Massa do Vulcão</h3>
+      <div class="opcoes-lista">
+        <label class="item-opcao"><input type="radio" name="massaVulcao" value="Canela" checked> <span>Canela</span></label>
+        <label class="item-opcao"><input type="radio" name="massaVulcao" value="Chocolate"> <span>Chocolate</span></label>
+        <label class="item-opcao"><input type="radio" name="massaVulcao" value="Baunilha"> <span>Baunilha</span></label>
+        <label class="item-opcao"><input type="radio" name="massaVulcao" value="Cenoura"> <span>Cenoura</span></label>
+      </div>
+    </div>
+
+    <!-- 4. Adicional de Frutas (SÓ APARECE NO BOLO VULCÃO) -->
+    <div class="grupo-opcao" id="secaoFrutas" style="display: none;">
+      <h4 class="titulo-categoria">Adicional de Frutas <small>(Opcional - + R$ 5,00 cada)</small></h4>
+      <div class="opcoes-grid-recheios">
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Morango" data-adicional="5" onchange="calcularPrecoTotal()"> <span>Morango (+ R$ 5,00)</span></label>
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Uva" data-adicional="5" onchange="calcularPrecoTotal()"> <span>Uva (+ R$ 5,00)</span></label>
+      </div>
+    </div>
+
+    <!-- 5. Observações -->
+    <div class="grupo-opcao">
+      <h3>Observações do Pedido</h3>
+      <textarea id="detalhesPedido" placeholder="Digite aqui alguma observação sobre o seu pedido..."></textarea>
+    </div>
+
+    <!-- Resumo e Botão -->
+    <div class="resumo-pedido">
+      <div class="valor-final">
+        <span>Total estimado:</span>
+        <strong id="precoFinal">R$ 45,00</strong>
+      </div>
+      <button type="button" class="btn-adicionar" onclick="adicionarAoCarrinhoCaseirinho()">
+        🛍️ Adicionar à Sacola   
+      </button>
+    </div>
+  </form>
+</section>
+
+<script>
+  function alternarTipoBolo() {
+    const tipo = document.querySelector('input[name="tipoBolo"]:checked').value;
+    const secaoCaseirinho = document.getElementById('secaoCaseirinho');
+    const secaoVulcao = document.getElementById('secaoVulcao');
+    const secaoMassa = document.getElementById('secaoMassa');
+    const secaoFrutas = document.getElementById('secaoFrutas');
+    const tituloSabor = document.getElementById('tituloSabor');
+
+    if (tipo === 'Caseirinho') {
+      secaoCaseirinho.style.display = 'flex';
+      secaoVulcao.style.display = 'none';
+      secaoMassa.style.display = 'none';
+      secaoFrutas.style.display = 'none';
+      tituloSabor.innerText = '2. Escolha o Sabor do Caseirinho';
+
+      document.querySelectorAll('input[name="fruta"]').forEach(input => input.checked = false);
+    } else {
+      secaoCaseirinho.style.display = 'none';
+      secaoVulcao.style.display = 'flex';
+      secaoMassa.style.display = 'block';
+      secaoFrutas.style.display = 'block';
+      tituloSabor.innerText = '2. Escolha o Sabor do Vulcão';
+    }
+
+    calcularPrecoTotal();
+  }
+
+  function calcularPrecoTotal() {
+    const tipoRadio = document.querySelector('input[name="tipoBolo"]:checked');
+    let total = tipoRadio ? parseFloat(tipoRadio.dataset.preco) : 45;
+
+    if (tipoRadio && tipoRadio.value === 'Bolo Vulcão') {
+      const frutasMarcadas = document.querySelectorAll('input[name="fruta"]:checked');
+      frutasMarcadas.forEach(item => {
+        total += parseFloat(item.dataset.adicional);
+      });
+    }
+
+    document.getElementById('precoFinal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+  }
+
+  function adicionarAoCarrinhoCaseirinho() {
+    const tipo = document.querySelector('input[name="tipoBolo"]:checked').value;
+    const precoTexto = document.getElementById('precoFinal').innerText;
+    const observacoes = document.getElementById('detalhesPedido').value;
+
+    let sabor = '';
+    let detalhesStr = '';
+
+    if (tipo === 'Caseirinho') {
+      sabor = document.querySelector('input[name="saborCaseirinho"]:checked').value;
+      detalhesStr = `Sabor: ${sabor}`;
+    } else {
+      sabor = document.querySelector('input[name="saborVulcao"]:checked').value;
+      const massa = document.querySelector('input[name="massaVulcao"]:checked').value;
+      const frutas = Array.from(document.querySelectorAll('input[name="fruta"]:checked')).map(el => el.value);
+
+      detalhesStr = `Sabor: ${sabor} | Massa: ${massa}`;
+      if (frutas.length > 0) {
+        detalhesStr += ` | Frutas: ${frutas.join(', ')}`;
+      }
+    }
+
+    const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace('.', '').replace(',', '.').trim());
+
+    const itemBolo = {
+      nome: `${tipo} - ${sabor}`,
+      detalhes: detalhesStr,
+      obs: observacoes,
+      preco: precoNumerico,
+      quantidade: 1
+    };
+
+    let carrinho = JSON.parse(localStorage.getItem('carrinhoGoldenCakes')) || [];
+    carrinho.push(itemBolo);
+    localStorage.setItem('carrinhoGoldenCakes', JSON.stringify(carrinho));
+
+    alert(`${tipo} adicionado à sua sacola!`);
+    window.location.href = 'index.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    alternarTipoBolo();
+  });
+</script>
+
+</body>
+</html>

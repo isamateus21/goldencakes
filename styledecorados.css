@@ -1,0 +1,186 @@
+body{
+  background-color: rgba(224, 165, 210, 0.315);
+}
+
+.titulo{
+    text-align: center;
+}
+
+.btn-voltar-inicio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #fff;
+  color: #d66885;
+  border: 1px solid #f2d6df;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 15px 0 5px 15px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.btn-voltar-inicio:hover {
+  background-color: #f7a8be;
+  color: #ffffff;
+  border-color: #f7a8be;
+}
+.montador-cardapio {
+  max-width: 850px; /* Largura maior para acomodar colunas lado a lado */
+  margin: 15px auto;
+background-image: url(fundo.jpg);
+text-align: center;
+  padding: 18px 22px;
+  border-radius: 14px;
+  border: 1px solid #f2d6df;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  font-size: 0.9rem;
+}
+
+/* Muda a cor das bolinhas (radio) e caixas (checkbox) para rosa */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: #f50549; 
+  width: 16px;          
+  height: 16px;        
+  cursor: pointer;
+}
+
+
+.montador-cardapio h2 {
+  color: #d66885;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.aviso-antecedencia {
+  background: #fff0f4;
+  color: #c0392b;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 15px;
+  margin-bottom: 12px;
+  border-left: 3px solid #d66885;
+}
+
+/* Divisão Topo: Formato + Tamanho na esquerda, Massa na direita */
+.linha-dupla {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Duas colunas na parte superior */
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.grupo-opcao {
+  margin-bottom: 12px;
+}
+
+.grupo-opcao h3 {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f9e3eb;
+  padding-bottom: 3px;
+}
+
+.subtitulo-recheio {
+  font-size: 0.8rem;
+  color: #d66885;
+  margin: 6px 0 4px 0;
+  font-weight: bold;
+}
+
+/* Grids compactos de itens */
+.opcoes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.opcoes-lista {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+
+/* Grid de Recheios em 3 Colunas Lado a Lado */
+.opcoes-grid-recheios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 itens por linha */
+  gap: 4px 8px;
+}
+
+/* Cards compactos */
+.card-radio, .item-opcao {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border: 1px solid #f2d6df;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 0.82rem;
+}
+
+.card-radio:hover, .item-opcao:hover {
+  background-color: #fff5f8;
+}
+
+.item-opcao span {
+  flex: 1;
+}
+
+textarea#detalhesRecheio {
+  width: 100%;
+  height: 45px; /* Menor altura para a caixa de texto */
+  padding: 6px;
+  border: 1px solid #f2d6df;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  resize: none;
+}
+
+/* Rodapé com Preço e Botão lado a lado */
+.resumo-pedido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #f2d6df;
+}
+
+.valor-final span {
+  font-size: 0.78rem;
+  color: #666;
+}
+
+.valor-final strong {
+  font-size: 1.3rem;
+  color: #d66885;
+}
+
+.btn-adicionar {
+  background-color: #f7a8be;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Ajuste Responsivo para Celular */
+@media (max-width: 600px) {
+  .linha-dupla {
+    grid-template-columns: 1fr; /* No celular volta a ser 1 coluna */
+  }
+  .opcoes-grid-recheios {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas no celular */
+  }
+}

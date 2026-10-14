@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorados</title>
+    <link rel="stylesheet" href="styledecorados.css">
+</head>
+<body>
+
+<section class="montador-cardapio">
+<a href="index.html" class="btn-voltar-inicio">
+  &larr; Voltar ao Início
+</a>
+
+  <h2 class="titulo">🎂 Monte o seu Bolo Decorado</h2>
+  <p class="aviso-antecedencia">⚠️ Aceitamos encomendas com no mínimo 5 dias de antecedência. Pagamento de 50% do valor total do pedido no ato da encomenda.</p>
+
+  <form id="formBoloDecorado">
+    <!-- 1. Formato do Bolo -->
+    <div class="grupo-opcao">
+      <h3>1. Escolha o Formato</h3>
+      <div class="opcoes-grid">
+        <label class="card-radio">
+          <input type="radio" name="formato" value="Redondo" checked onchange="atualizarTamanhos()">
+          <span>Bolo Redondo</span>
+        </label>
+        <label class="card-radio">
+          <input type="radio" name="formato" value="Retangular" onchange="atualizarTamanhos()">
+          <span>Bolo Retangular</span>
+        </label>
+        <label class="card-radio">
+          <input type="radio" name="formato" value="Quadrado" onchange="atualizarTamanhos()">
+          <span>Bolo Quadrado</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 2. Tamanho -->
+    <div class="grupo-opcao">
+      <h3>2. Escolha o Tamanho <small>(3 camadas de massa, 2 de recheio)</small></h3>
+      <div id="containerTamanhos" class="opcoes-lista">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+    </div>
+
+    <!-- 3. Massa -->
+    <div class="grupo-opcao">
+      <h3>3. Escolha a Massa</h3>
+      <div class="opcoes-lista">
+        <label class="item-opcao">
+          <input type="radio" name="massa" value="Baunilha" data-adicional="0" checked onchange="calcularPrecoTotal()">
+          <span>Baunilha</span>
+        </label>
+        <label class="item-opcao">
+          <input type="radio" name="massa" value="Chocolate" data-adicional="0" onchange="calcularPrecoTotal()">
+          <span>Chocolate</span>
+        </label>
+        <label class="item-opcao">
+          <input type="radio" name="massa" value="Red velvet" data-adicional="0" onchange="calcularPrecoTotal()">
+          <span>Red Velvet</span>
+        </label>
+        <label class="item-opcao">
+          <input type="radio" name="massa" value="Baunilha e Chocolate" data-adicional="10" onchange="calcularPrecoTotal()">
+          <span>Baunilha e Chocolate (+ R$ 10,00)</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 4. Recheios divididos por Categoria -->
+    <div class="grupo-opcao">
+      <h3>4. Escolha até 2 Recheios</h3>
+
+      <!-- Tradicionais -->
+      <h4>Recheios Tradicionais <small>(Inclusos no valor base)</small></h4>
+      <div class="opcoes-grid-recheios">
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Ninho" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Ninho</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Paçoca" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Paçoca</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Beijinho" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Beijinho</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Brigadeiro" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Brigadeiro</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Ovomaltine" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Ovomaltine</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Bicho de pé" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Bicho de Pé</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de Ninho" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Mousse de Ninho</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de limão" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Mousse de Limão</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de morango" data-adicional="0" onchange="limitarEcalcular(this)"> <span>Mousse de Morango</span></label>
+      </div>
+
+      <!-- Gourmet -->
+      <h4 class="titulo-categoria">Recheios Gourmet <small>(+ R$ 20,00 cada)</small></h4>
+      <div class="opcoes-grid-recheios">
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Kitkat" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Kitkat</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Sonho de valsa" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Sonho de Valsa</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Doce de leite" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Doce de Leite</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Brigadeiro de laka" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Brigadeiro de Laka</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Brigadeiro de maracujá" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Brigadeiro de Maracujá</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de maracujá" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Mousse de Maracujá</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de ovomaltine" data-adicional="20" onchange="limitarEcalcular(this)"> <span>Mousse de Ovomaltine</span></label>
+      </div>
+
+      <!-- Premium -->
+      <h4 class="titulo-categoria">Recheios Premium <small>(+ R$ 25,00 cada)</small></h4>
+      <div class="opcoes-grid-recheios">
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Pistache" data-adicional="25" onchange="limitarEcalcular(this)"> <span>Pistache</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Kinder bueno" data-adicional="25" onchange="limitarEcalcular(this)"> <span>Kinder Bueno</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Ganache de chocolate" data-adicional="25" onchange="limitarEcalcular(this)"> <span>Ganache de Chocolate</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de chocolate" data-adicional="25" onchange="limitarEcalcular(this)"> <span>Mousse de Chocolate</span></label>
+        <label class="item-opcao"><input type="checkbox" name="recheio" value="Mousse de chocolate branco" data-adicional="25" onchange="limitarEcalcular(this)"> <span>Mousse de Choc. Branco</span></label>
+      </div>
+
+      <!-- Adicionais de Fruta -->
+      <h4 class="titulo-categoria">Adicional de Frutas <small>(Opcional - + R$ 12,00 cada)</small></h4>
+      <div class="opcoes-grid-recheios">
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Ameixa" data-adicional="12" onchange="calcularPrecoTotal()"> <span>Ameixa</span></label>
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Abacaxi" data-adicional="12" onchange="calcularPrecoTotal()"> <span>Abacaxi</span></label>
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Cereja" data-adicional="12" onchange="calcularPrecoTotal()"> <span>Cereja</span></label>
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Pêssego" data-adicional="12" onchange="calcularPrecoTotal()"> <span>Pêssego</span></label>
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Morango" data-adicional="12" onchange="calcularPrecoTotal()"> <span>Morango</span></label>
+        <label class="item-opcao"><input type="checkbox" name="fruta" value="Uva verde" data-adicional="12" onchange="calcularPrecoTotal()"> <span>Uva Verde</span></label>
+      </div>
+    </div>
+
+    <!-- 5. Observações / Tema -->
+    <div class="grupo-opcao">
+      <h3>5. Observações / Tema da Decoração</h3>
+      <textarea id="detalhesRecheio" placeholder="Envie o tema da festa, cores desejadas ou detalhe do pedido... (se for foto encaminhar no WhatsApp)"></textarea>
+    </div>
+
+    <!-- Resumo e Botão -->
+    <div class="resumo-pedido">
+      <div class="valor-final">
+        <span>Total estimado:</span>
+        <strong id="precoFinal">R$ 65,00</strong>
+      </div>
+      <button type="button" class="btn-adicionar" onclick="adicionarAoCarrinhoDecorado()">
+         🛍️ Adicionar à Sacola
+      </button>
+    </div>
+  </form>
+</section>
+<!-- CÓDIGO JAVASCRIPT -->
+<script>
+  // Dados dos preços por formato e tamanho (conforme cardápio oficial)
+  const cardapioPrecos = {
+    Redondo: [
+      { tamanho: 'PP - 2/4 fatias', preco: 65 },
+      { tamanho: 'P - 10/12 fatias', preco: 130 },
+      { tamanho: 'M - 20/25 fatias', preco: 180 },
+      { tamanho: 'G - 35/40 fatias', preco: 230 },
+      { tamanho: 'GG - 50 fatias', preco: 280 },
+      { tamanho: 'XG - 70 fatias', preco: 390 }
+    ],
+    Retangular: [
+      { tamanho: 'PP - 10/15 fatias', preco: 140 },
+      { tamanho: 'P - 25/30 fatias', preco: 200 },
+      { tamanho: 'M - 45/50 fatias', preco: 300 },
+      { tamanho: 'G - 65/70 fatias', preco: 400 },
+      { tamanho: 'GG - 100 fatias', preco: 520 }
+    ],
+    Quadrado: [
+      { tamanho: 'P - 10/12 fatias', preco: 120 },
+      { tamanho: 'M - 25/30 fatias', preco: 180 },
+      { tamanho: 'G - 45/50 fatias', preco: 280 },
+      { tamanho: 'GG - 70 fatias', preco: 390 }
+    ]
+  };
+
+  // Atualiza a lista de tamanhos na tela conforme o formato escolhido
+  function atualizarTamanhos() {
+    const formatoSelecionado = document.querySelector('input[name="formato"]:checked').value;
+    const container = document.getElementById('containerTamanhos');
+    const listaTamanhos = cardapioPrecos[formatoSelecionado];
+
+    container.innerHTML = '';
+
+    listaTamanhos.forEach((item, index) => {
+      const checked = index === 0 ? 'checked' : '';
+      container.innerHTML += `
+        <label class="item-opcao">
+          <input type="radio" name="tamanho" value="${item.tamanho}" data-preco="${item.preco}" ${checked} onchange="calcularPrecoTotal()">
+          <span>${item.tamanho}</span>
+          <strong>R$ ${item.preco},00</strong>
+        </label>
+      `;
+    });
+
+    calcularPrecoTotal();
+  }
+
+  // Trava o limite de até 2 recheios
+  function limitarEcalcular(elemento) {
+    const recheiosSelecionados = document.querySelectorAll('input[name="recheio"]:checked');
+    
+    if (recheiosSelecionados.length > 2) {
+      alert('Você só pode escolher no máximo 2 recheios por bolo!');
+      elemento.checked = false;
+    }
+    
+    calcularPrecoTotal();
+  }
+
+  // Soma tamanho + massa especial + recheios adicionais + frutas
+  function calcularPrecoTotal() {
+    const tamanhoRadio = document.querySelector('input[name="tamanho"]:checked');
+    const massaRadio = document.querySelector('input[name="massa"]:checked');
+    const recheiosMarcados = document.querySelectorAll('input[name="recheio"]:checked');
+    const frutasMarcadas = document.querySelectorAll('input[name="fruta"]:checked');
+
+    let total = tamanhoRadio ? parseFloat(tamanhoRadio.dataset.preco) : 0;
+    
+    if (massaRadio) total += parseFloat(massaRadio.dataset.adicional);
+
+    recheiosMarcados.forEach(item => {
+      total += parseFloat(item.dataset.adicional);
+    });
+
+    frutasMarcadas.forEach(item => {
+      total += parseFloat(item.dataset.adicional);
+    });
+
+    document.getElementById('precoFinal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+  }
+
+  function adicionarAoCarrinhoDecorado() {
+  // Captura os dados selecionados no formulário
+  const formato = document.querySelector('input[name="formato"]:checked').value;
+  const tamanho = document.querySelector('input[name="tamanho"]:checked').value;
+  const massa = document.querySelector('input[name="massa"]:checked').value;
+  const precoTexto = document.getElementById('precoFinal').innerText;
+  const observacoes = document.getElementById('detalhesRecheio').value;
+
+  // Captura os recheios selecionados
+  const recheios = Array.from(document.querySelectorAll('input[name="recheio"]:checked'))
+                        .map(el => el.value);
+
+  // Captura as frutas selecionadas
+  const frutas = Array.from(document.querySelectorAll('input[name="fruta"]:checked'))
+                      .map(el => el.value);
+
+  // Converte o valor em texto para número (ex: "R$ 105,00" -> 105.00)
+  const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace('.', '').replace(',', '.').trim());
+
+  // Cria o objeto do bolo personalizado
+  const itemBolo = {
+    nome: `Bolo ${formato} (${tamanho})`,
+    detalhes: `Massa: ${massa} | Recheios: ${recheios.join(', ') || 'Nenhum'} ${frutas.length ? '| Frutas: ' + frutas.join(', ') : ''}`,
+    obs: observacoes,
+    preco: precoNumerico,
+    quantidade: 1
+  };
+
+  // Busca o carrinho já existente ou cria um novo array vazio
+  let carrinho = JSON.parse(localStorage.getItem('carrinhoGoldenCakes')) || [];
+
+  // Adiciona o novo bolo na lista
+  carrinho.push(itemBolo);
+
+  // Salva de volta no navegador (localStorage)
+  localStorage.setItem('carrinhoGoldenCakes', JSON.stringify(carrinho));
+
+  // Confirmação e direcionamento para a página inicial onde fica a Sacola
+  alert(`Bolo ${formato} (${tamanho}) foi adicionado à sua sacola!`);
+  window.location.href = 'index.html'; // Redireciona para a home para ver a Sacola
+
+  };
+</script>
+    
+</body>
+</html>
